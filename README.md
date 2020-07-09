@@ -1,6 +1,8 @@
 # Pencil: The Minetest Mod
 Pencil is a minetest mod api that can make tools to change the infotext in a block.
 
+![Screenshot](https://raw.githubusercontent.com/Emojigit/minetest-pencil/master/Inkedscreenshot_20200709_185325_LI.jpg)
+
 # API usage
 ## register_pencil(id,name,text,image)
 
