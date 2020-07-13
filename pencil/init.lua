@@ -1,4 +1,4 @@
-print("[pencil] Loading")
+minetest.log("action","[pencil] Loading")
 pencil = {}
 function pencil.register_pencil(id,name,text,image)
 	local id,name,text,image = id,name,text,image
@@ -24,13 +24,13 @@ function pencil.register_pencil(id,name,text,image)
 		end,
 		inventory_image = image
 	})
-	print("[pencil] Register a pencil "..id.." with text "..text)
+	minetest.log("action","[pencil] Register a pencil "..id.." with text "..text)
 end
 
 -- match to old version
 register_pencil = function(id,name,text,image)
 	pencil.register_pencil(id,name,text,image)
-	print("[pencil] The pencil..id.."was registered by using register_pencil , use pencil.register_pencil instad.")
+	minetest.log("warning","[pencil] The pencil "..id.." was registered by using \"register_pencil\" , use \"pencil.register_pencil\" instad.")
 end
 
 pencil.register_pencil("pencil:hello_world","Hello World Pencil","Hello World!",nil)
@@ -48,7 +48,7 @@ minetest.register_chatcommand("pencil_add", {
 	privs = {add_pencil=true},
 	description = "Change the text on TMP pencil (pencil:tmp)",
 	func = function(name,param)
-		register_pencil(":pencil:tmp",tostring(param).." TMP Pencil",tostring(param),nil)
+		pencil.register_pencil(":pencil:tmp",tostring(param).." TMP Pencil",tostring(param),nil)
 	end,
 })
-print("[pencil] Loaded")
+minetest.log("action","[pencil] Loaded")
