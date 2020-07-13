@@ -1,5 +1,6 @@
-print("[pencil] Loading")
-function register_pencil(id,name,text,image)
+minetest.log("action","[pencil] Loading")
+pencil = {}
+function pencil.register_pencil(id,name,text,image)
 	local id,name,text,image = id,name,text,image
 	if not(id) then
 		print("[pencil] Cannot register a pencil with no name")
@@ -23,26 +24,31 @@ function register_pencil(id,name,text,image)
 		end,
 		inventory_image = image
 	})
-	print("[pencil] Register a pencil "..id.." with text "..text)
+	minetest.log("action","[pencil] Register a pencil "..id.." with text "..text)
 end
 
-register_pencil("pencil:hello_world","Hello World Pencil","Hello World!",nil)
+-- match to old version
+register_pencil = function(id,name,text,image)
+	pencil.register_pencil(id,name,text,image)
+	minetest.log("warning","[pencil] The pencil "..id.." was registered by using \"register_pencil\" , use \"pencil.register_pencil\" instad.")
+end
+
+pencil.register_pencil("pencil:hello_world","Hello World Pencil","Hello World!",nil)
+-- test the warning when using the old function to register pencil
 register_pencil("pencil:blank","Blank Test Pencil",nil,"barrier_inv.png")
-register_pencil("pencil:eraser","Eraser"," ","eraser.png")
-register_pencil("pencil:tmp","TMP Pencil"," ",nil)
-register_pencil("pencil:noaccess","No Access Pencil","Don't Access!",nil)
+pencil.register_pencil("pencil:eraser","Eraser"," ","eraser.png")
+pencil.register_pencil("pencil:tmp","TMP Pencil"," ",nil)
+pencil.register_pencil("pencil:noaccess","No Access Pencil","Don't Access!",nil)
 
 minetest.register_privilege("add_pencil", {
 	description = "Can use pencil_add command to add pencil."
 })
-math.randomseed(100)
-random = math.random(1000)
 minetest.register_chatcommand("pencil_add", {
 	params = "<text>",
 	privs = {add_pencil=true},
-	description = "Add a pencil.",
+	description = "Change the text on TMP pencil (pencil:tmp)",
 	func = function(name,param)
-		register_pencil(":pencil:tmp",tostring(param).." TMP Pencil",tostring(param),nil)
+		pencil.register_pencil(":pencil:tmp",tostring(param).." TMP Pencil",tostring(param),nil)
 	end,
 })
-print("[pencil] Loaded")
+minetest.log("action","[pencil] Loaded")
