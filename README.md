@@ -4,7 +4,7 @@ Pencil is a minetest mod api that can make tools to change the infotext in a blo
 ![Screenshot](https://raw.githubusercontent.com/Emojigit/minetest-pencil/master/Inkedscreenshot_20200709_185325_LI.jpg)
 
 # API usage
-## register_pencil(id,name,text,image)
+## pencil.register_pencil(id,name,text,image)
 
  - id = the name of pencil (e.g. mod:foobar )
  - name = the name that display in inventory (e.g. FooBar Pencil ). The default is `text.."Pencil"`.
