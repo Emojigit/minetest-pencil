@@ -3,32 +3,36 @@ pencil = {}
 function pencil.register_pencil(id,name,text,image,not_cre_inv)
 	local id,name,text,image = id,name,text,image
 	if not(id) then
-		print("[pencil] Cannot register a pencil with no name")
+		print("[pencil] Cannot register a pencil with no id")
 		return
 	end
 	if not(text) then
 		text = "Unconfiged"
+		print("[pencil] Pencil With no text, using \"Unconfiged\"")
 	end
 	if not(name) then
 		name = text.." Pencil"
+		print("[pencil] Pencil With no name, using \""..text.." Pencil\"")
 	end
 	if not(image) then
 		image = "pencil.png"
+		print("[pencil] Pencil With no image, using \"pencil.png\"")
 	end
 	if not_cre_inv == nil then
 		not_cre_inv = false
+		print("[pencil] Pencil's not_cre_inv setting is nil, using \"false\"")
 	end
 	minetest.register_craftitem(id, {
-		description = name,
+		description = tostring(name),
 		on_use = function(itemstack, user, pointed_thing)
 			local pos = minetest.get_pointed_thing_position(pointed_thing, above)
 			local meta = minetest.get_meta(pos);
-			meta:set_string("infotext",text);
+			meta:set_string("infotext",tostring(text));
 		end,
-		inventory_image = image,
+		inventory_image = tostring(image),
 		not_in_creative_inventory = not_cre_inv
 	})
-	minetest.log("action","[pencil] Register a pencil "..id.." with text "..text)
+	minetest.log("action","[pencil] Register a pencil "..tostring(id).." with text "..tostring(text))
 end
 
 -- match to old version
@@ -74,13 +78,13 @@ minetest.register_node("pencil:get_tmp",{
 		if receiverref == nil then
 			return false, receiver .. " is not a known player"
 		end
-		local leftover = receiverref:get_inventory():add_item("main", "pencil:tmp_"..receiver)
+		local leftover = receiverref:get_inventory():add_item("main", "pencil:user_"..receiver)
 	end,
 })
 
 minetest.register_on_joinplayer(function(player)
 		print(player:get_player_name())
-		pencil.register_pencil("pencil:tmp_"..player:get_player_name(),player:get_player_name().."\'s Pencil",nil,nil,true)
+		pencil.register_pencil("pencil:user_"..tostring(player:get_player_name()),tostring(player:get_player_name()).."\'s Pencil"," ",nil,true)
 	end
 )
 minetest.log("action","[pencil] Loaded")
