@@ -12,5 +12,5 @@ Pencil is a minetest mod api that can make tools to change the infotext in a blo
  - image = the image that show in hudbar and inventory (e.g. foobar.png). The default is [`pencil.png`](https://github.com/Emojigit/minetest-pencil/blob/master/pencil/textures/pencil.png)
 
 # Links
-(Minetest Forum)[https://forum.minetest.net/viewtopic.php?t=25076]
-(Minetest ContentDB)[https://content.minetest.net/packages/Emojiminetest/pencil]
+ - [Minetest Forum](https://forum.minetest.net/viewtopic.php?t=25076)
+ - [Minetest ContentDB](https://content.minetest.net/packages/Emojiminetest/pencil)
